@@ -7,9 +7,12 @@ from .imagenet import ImageNet
 from .mnist import MNIST, FashionMNIST
 from .samplers import DistributedSampler
 
+from .ciga_call import CigaretteCallDataset
+
 __all__ = [
     'BaseDataset', 'ImageNet', 'CIFAR10', 'CIFAR100', 'MNIST', 'FashionMNIST',
     'build_dataloader', 'build_dataset', 'Compose', 'DistributedSampler',
     'ConcatDataset', 'RepeatDataset', 'ClassBalancedDataset', 'DATASETS',
-    'PIPELINES'
+    'PIPELINES',
+    'CigaretteCallDataset',
 ]
