@@ -17,7 +17,7 @@ from mmcls.models import build_classifier
 id_to_class = {
     0: "normal",
     1: "calling",
-    2: "smoke"
+    2: "smoking"
 }
 
 if __name__ == '__main__':
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # f = open(json_file_path, mode='r+')
     # content = json.load(f)
     json_file = open(json_file_path, mode='w')
-    weight_path = '../../work_dir/version01/epoch_100.pth'
+    weight_path = '../../work_dir/version02/epoch_100.pth'
     model = build_classifier(cfg.model)
     model.eval()
     save_path = os.path.join(os.path.dirname(cfg.data.test.data_prefix), 'test_result')
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         print(np.round(output_numpy[0][cls_output[0]], 5))
 
         result_json = {
-            "image_name": img_name.replace('.png', '.jpg'),
+            "image_name": img_name,
             "category": id_to_class[cls_output[0]],
             "score": np.round(np.float(output_numpy[0][cls_output[0]]), 5)}
         save_json_content.append(result_json)
@@ -77,5 +77,6 @@ if __name__ == '__main__':
         # if k > 10:
         #     break
 
+    save_json_content.sort(key=lambda x: int(x['image_name'][:-4]))
     json.dump(save_json_content, json_file, indent=4)
 
